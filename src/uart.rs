@@ -378,6 +378,7 @@ where UART: Deref<Target = UartRegisterBlock>
         let clk_src_freq = self.clk_src_freq.unwrap();
         self.uart.ctrl().write(|w| {
             w.ucagm().set_bit();
+            w.hfc_en().set_bit();
             match self.clk_src {
                 Some(UartClockSource::Pclk) => w.bclksrc().peripheral_clock(),
                 Some(UartClockSource::Ibro) => w.bclksrc().clk2(),
